@@ -89,12 +89,12 @@ public class BaseDelegate {
 		Connection dbCon;
 		try {
 			if (dbSource == null) {
-				System.out.println("DataSource  looking up URL " + "java:jboss/datasources/newCheckoutMySqlDS");
+				System.out.println("DataSource  looking up URL " + "java:/mytestjndi");
 				InitialContext aInitialContext = new InitialContext();
-				dbSource = (DataSource) aInitialContext.lookup("java:jboss/datasources/newCheckoutMySqlDS");
+				dbSource = (DataSource) aInitialContext.lookup("java:/mytestjndi");
 
 				System.out.println("DataSource dbSource was null and was successfully setup by looking up URL "
-						+ "java:jboss/datasources/newCheckoutMySqlDS");
+						+ "java:/mytestjndi");
 			}
 		} catch (NamingException e) {
 			System.out.println("NamingException in initialize ");

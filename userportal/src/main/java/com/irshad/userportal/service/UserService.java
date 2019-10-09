@@ -13,7 +13,7 @@ public class UserService {
 	
 	@GET
 	@Path("test")
-	public Response createUser() {
+	public Response getMessage() {
 		
 		return Response.status(200).entity("Hi").build();
 	}
@@ -25,6 +25,6 @@ public class UserService {
 		UserDelegate delegate = new UserDelegate();
 		delegate.createUser(user);
 		
-		return Response.status(200).entity("Hi").build();
+		return Response.status(200).entity(user).build();
 	}
 }
