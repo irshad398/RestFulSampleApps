@@ -7,9 +7,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.apache.log4j.Logger;
+
+import com.irshad.userportal.service.UserService;
+
 
 public class BaseDelegate {
-
+	private static final Logger log = Logger.getLogger(BaseDelegate.class);
+	
 	private Connection connection;
 	private static DataSource dbSource = null;
 
@@ -89,17 +94,17 @@ public class BaseDelegate {
 		Connection dbCon;
 		try {
 			if (dbSource == null) {
-				System.out.println("DataSource  looking up URL " + "java:/mytestjndi");
+				log.info("DataSource  looking up URL " + "java:/mytestjndi");
 				InitialContext aInitialContext = new InitialContext();
 				dbSource = (DataSource) aInitialContext.lookup("java:/mytestjndi");
 
-				System.out.println("DataSource dbSource was null and was successfully setup by looking up URL "
+				log.debug("DataSource dbSource was null and was successfully setup by looking up URL "
 						+ "java:/mytestjndi");
 			}
 		} catch (NamingException e) {
-			System.out.println("NamingException in initialize ");
+			log.error("NamingException in initialize ", e);
 		} catch (Exception e) {
-			System.out.println("Exception in initialize ");
+			log.error("Exception in initialize ", e);
 		}
 		
 		dbCon = dbSource.getConnection();

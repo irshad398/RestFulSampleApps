@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.irshad.userportal.model.User;
+import com.irshad.userportal.service.UserService;
 
 public class UserDAO extends BaseDAO{
-
-	 
+	private static final Logger log = Logger.getLogger(UserDAO.class);
+	
 	public UserDAO() {
 	
 	}
@@ -29,11 +32,11 @@ public class UserDAO extends BaseDAO{
 			stmt.setString(2, user.getName());
 			int count = stmt.executeUpdate();
 			if(count>0)
-				System.out.println("Success");
+				log.info("Success:: Created the user!");
 			else {}
 			//throw error
 		} catch (SQLException e) {
-			System.out.println("SQLException in createUser");
+			log.error("SQLException in createUser ",e);
 //			throw new DAOException("SQLException in createUserRole():", e);
 		} finally {
 			close(stmt, rs);

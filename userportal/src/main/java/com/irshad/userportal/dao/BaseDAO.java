@@ -5,7 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import org.apache.log4j.Logger;
+
+import com.irshad.userportal.service.UserService;
+
 public class BaseDAO {
+	private static final Logger log = Logger.getLogger(BaseDAO.class);
+	
 	private Connection connection;
 
 	public BaseDAO() {
@@ -28,7 +34,7 @@ public class BaseDAO {
 			try {
 				rs.close();
 			} catch (Exception e) {
-				System.out.println("Exception in close ");
+				log.error("Exception in close ",e );
 			}
 		}
 	}
@@ -38,7 +44,7 @@ public class BaseDAO {
 			try {
 				stmt.close();
 			} catch (Exception e) {
-				System.out.println("Exception in close ");
+				log.error("Exception in close ", e);
 			}
 		}
 	}
